@@ -1,0 +1,9 @@
+[submodule "src/third_party/nanobench"]
+	path = src/third_party/nanobench
+	url = https://github.com/martinus/nanobench.git
+[submodule "src/third_party/doctest"]
+	path = src/third_party/doctest
+	url = https://github.com/onqtam/doctest.git
+[submodule "src/third_party/libsimdpp"]
+	path = src/third_party/libsimdpp
+	url = https://github.com/p12tic/libsimdpp.git
