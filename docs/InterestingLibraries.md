@@ -2,7 +2,7 @@
 
 # Linear Algebra
 - https://github.com/wichtounet/etl.git
-- 
+
 
 # Datasets
 - https://github.com/wichtounet/mnist.git
