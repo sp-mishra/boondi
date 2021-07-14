@@ -10,6 +10,7 @@ include_directories(src/third_party/)
 include_directories(src/third_party/nanobench/src/include)
 include_directories(src/third_party/doctest)
 include_directories(src/third_party/libsimdpp)
+include_directories(src/third_party/mnist/include)
 
 find_library(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
@@ -20,6 +21,11 @@ include_directories(${GLEW_INCLUDE_DIRS})
 file(GLOB
         NANO_BENCHMARK_SRC
         "src/third_party/nanobench/src/include/nanobench.h"
+        )
+
+file(GLOB
+        MNIST_READER_SRC
+        "src/third_party/mnist/include/mnist/*.hpp"
         )
 
 file(GLOB
@@ -52,9 +58,10 @@ file(GLOB
 add_executable(boondi
         ${LiBSIMD_CPP_SRC}
         ${NANO_BENCHMARK_SRC}
+        ${MNIST_READER_SRC}
         ${DOCTEST_SRC}
         ${MAIN_SRC}
-        src/main/example/OpenCLExamples.hpp)
+        src/main/example/OpenCLExamples.hpp src/main/example/PerfTests.hpp)
 
 find_package(raylib 3.0 QUIET) # Let CMake search for a raylib-config.cmake
 # You could change the QUIET above to REQUIRED and remove this if() clause
