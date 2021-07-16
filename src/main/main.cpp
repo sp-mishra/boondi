@@ -2,6 +2,7 @@
 #include "example/OpenCLExamples.hpp"
 #define ANKERL_NANOBENCH_IMPLEMENT
 #include <nanobench.h>
+#include <boost/proto/proto.hpp>
 
 int main(int argc, char **argv) {
   grkl::OpenCLExamples openCLExamples;
