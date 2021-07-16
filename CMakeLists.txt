@@ -28,16 +28,16 @@ file(GLOB
         "src/third_party/mnist/include/mnist/*.hpp"
         )
 
-file(GLOB
-        LiBSIMD_CPP_SRC
-        "src/third_party/libsimdpp/simdpp/*.h"
-        "src/third_party/libsimdpp/simdpp/*.inl"
-        "src/third_party/libsimdpp/simdpp/core/*.h"
-        "src/third_party/libsimdpp/simdpp/core/*.inl"
-        "src/third_party/libsimdpp/simdpp/core/detail/*.h"
-        "src/third_party/libsimdpp/simdpp/core/detail/*.inl"
-        "src/third_party/libsimdpp/simdpp/detail/*.h"
-        "src/third_party/libsimdpp/simdpp/detail/*.inl"
+file(GLOB_RECURSE
+        LIBSIMD_CPP_SRC
+        "src/third_party/libsimdpp/*.h"
+        "src/third_party/libsimdpp/*.inl"
+#        "src/third_party/libsimdpp/simdpp/core/*.h"
+#        "src/third_party/libsimdpp/simdpp/core/*.inl"
+#        "src/third_party/libsimdpp/simdpp/core/detail/*.h"
+#        "src/third_party/libsimdpp/simdpp/core/detail/*.inl"
+#        "src/third_party/libsimdpp/simdpp/detail/*.h"
+#        "src/third_party/libsimdpp/simdpp/detail/*.inl"
         "src/third_party/libsimdpp/simdpp/*/*"
         )
 
@@ -48,6 +48,12 @@ file(GLOB
         "src/third_party/doctest/doctest/parts/*.h"
         "src/third_party/doctest/doctest/parts/*.cpp"
         )
+file(GLOB_RECURSE
+        BOOST_SOURCE_FILES
+        src/third_party/boost/*.h
+        src/third_party/boost/*.hpp
+        )
+
 
 file(GLOB
         MAIN_SRC
@@ -56,10 +62,11 @@ file(GLOB
         )
 
 add_executable(boondi
-        ${LiBSIMD_CPP_SRC}
+        ${LIBSIMD_CPP_SRC}
         ${NANO_BENCHMARK_SRC}
         ${MNIST_READER_SRC}
         ${DOCTEST_SRC}
+        ${BOOST_SOURCE_FILES}
         ${MAIN_SRC}
         src/main/example/OpenCLExamples.hpp src/main/example/PerfTests.hpp)
 
@@ -93,6 +100,7 @@ message("OPENGL_LIBRARIES: ${OPENGL_LIBRARIES}")
 message("RAYLIB_LIB: ${RAYLIB_LIB}")
 message("GLEW::GLEW: ${GLEW}")
 message("CMAKE_CURRENT_BINARY_DIR: ${CMAKE_CURRENT_BINARY_DIR}")
+message("LIBSIMD_CPP_SRC: ${LIBSIMD_CPP_SRC}")
 target_link_libraries(boondi
         ${OPENGL_LIBRARIES}
         GLEW::GLEW
