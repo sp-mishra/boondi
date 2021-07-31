@@ -16,3 +16,54 @@
 [submodule "src/third_party/raylib"]
 	path = src/third_party/raylib
 	url = https://github.com/raysan5/raylib.git
+[submodule "src/third_party/imgui"]
+	path = src/third_party/imgui
+	url = https://github.com/ocornut/imgui.git
+[submodule "src/third_party/rayutils"]
+	path = src/third_party/rayutils
+	url = https://github.com/Rabios/rayutils.git
+[submodule "src/third_party/imgui-impl-raylib"]
+	path = src/third_party/imgui-impl-raylib
+	url = https://github.com/oskaritimperi/imgui-impl-raylib.git
+[submodule "src/third_party/raycons"]
+	path = src/third_party/raycons
+	url = https://github.com/nbdy/raycons.git
+[submodule "src/third_party/libpartikel"]
+	path = src/third_party/libpartikel
+	url = https://github.com/dbriemann/libpartikel.git
+[submodule "src/third_party/MathX"]
+	path = src/third_party/MathX
+	url = https://github.com/JusticeShultz/MathX.git
+[submodule "src/third_party/RaylibSIMD"]
+	path = src/third_party/RaylibSIMD
+	url = https://github.com/Doy-lee/RaylibSIMD.git
+[submodule "src/third_party/raylibImGui"]
+	path = src/third_party/raylibImGui
+	url = https://github.com/Ushio/raylibImGui.git
+[submodule "src/third_party/cbit-raylib"]
+	path = src/third_party/cbit-raylib
+	url = https://github.com/nurakmaljalil91/cbit-raylib.git
+[submodule "src/third_party/PhysicsEngine"]
+	path = src/third_party/PhysicsEngine
+	url = https://github.com/CarterPatterson/PhysicsEngine.git
+[submodule "src/third_party/clay"]
+	path = src/third_party/clay
+	url = https://github.com/RafaelOliveira/clay.git
+[submodule "src/third_party/WaveEquationDemo"]
+	path = src/third_party/WaveEquationDemo
+	url = https://github.com/ProfJski/WaveEquationDemo.git
+[submodule "src/third_party/tic-tac-toe-ai"]
+	path = src/third_party/tic-tac-toe-ai
+	url = https://github.com/fr3fou/tic-tac-toe-ai.git
+[submodule "src/third_party/VoronoiDiagram"]
+	path = src/third_party/VoronoiDiagram
+	url = https://github.com/DavinderMaverick/VoronoiDiagram.git
+[submodule "src/third_party/Game-of-Life-in-multiple-languages"]
+	path = src/third_party/Game-of-Life-in-multiple-languages
+	url = https://github.com/Skaruts/Game-of-Life-in-multiple-languages.git
+[submodule "src/third_party/raylib-cmake-template"]
+	path = src/third_party/raylib-cmake-template
+	url = https://github.com/SasLuca/raylib-cmake-template.git
+[submodule "src/third_party/awesome-raylib"]
+	path = src/third_party/awesome-raylib
+	url = https://github.com/Rabios/awesome-raylib.git
