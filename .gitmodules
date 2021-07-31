@@ -67,3 +67,15 @@
 [submodule "src/third_party/awesome-raylib"]
 	path = src/third_party/awesome-raylib
 	url = https://github.com/Rabios/awesome-raylib.git
+[submodule "src/third_party/box2d-lite"]
+	path = src/third_party/box2d-lite
+	url = https://github.com/erincatto/box2d-lite.git
+[submodule "src/third_party/Physac"]
+	path = src/third_party/Physac
+	url = https://github.com/victorfisac/Physac.git
+[submodule "src/third_party/tinygeom2d"]
+	path = src/third_party/tinygeom2d
+	url = https://github.com/ttalvitie/tinygeom2d.git
+[submodule "src/third_party/tiny-dnn"]
+	path = src/third_party/tiny-dnn
+	url = https://github.com/tiny-dnn/tiny-dnn.git
