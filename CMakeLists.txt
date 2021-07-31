@@ -11,7 +11,15 @@ include_directories(src/third_party/nanobench/src/include)
 include_directories(src/third_party/doctest)
 include_directories(src/third_party/libsimdpp)
 include_directories(src/third_party/mnist/include)
+include_directories(src/third_party/raylib/src/)
+include_directories(src/third_party/raylib/src/extras)
+include_directories(src/third_party/json/single_include/nlohmann/)
+include_directories(src/third_party/rayutils)
 include_directories(src/third_party/argh)
+include_directories(src/third_party/csv2/single_include/csv2)
+include_directories(src/third_party/box2d-lite/include)
+include_directories(src/third_party/spdlog/include)
+include_directories(src/third_party/fmt/include)
 
 find_library(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
@@ -63,7 +71,33 @@ file(GLOB_RECURSE
         src/third_party/boost/*.hpp
         )
 
-file(GLOB
+file(GLOB_RECURSE
+        RAYLIB_EXTRA_SOURCE_FILES
+        src/third_party/raylib/src/extras/*.h
+        )
+
+file(GLOB_RECURSE
+        RAYLIB_UTILS_SOURCE_FILES
+        src/third_party/rayutils/*.h
+        )
+
+file(GLOB_RECURSE
+        JSON_SOURCE_FILES
+        src/third_party/json/single_include/nlohmann/*.hpp
+        )
+
+file(GLOB_RECURSE
+        CSV2_SOURCE_FILES
+        src/third_party/csv2/single_include/csv2/*.hpp
+        )
+
+file(GLOB_RECURSE
+        BOX2D_LITE_SOURCE_FILES
+        src/third_party/box2d-lite/src/*.cpp
+        src/third_party/box2d-lite/include/box2d-lite/*.h
+        )
+
+file(GLOB_RECURSE
         MAIN_SRC
         "src/main/*.cpp"
         "src/main/*.hpp"
@@ -73,11 +107,16 @@ add_executable(boondi
         ${LIBSIMD_CPP_SRC}
         ${ARGH_SRC}
         ${NANO_BENCHMARK_SRC}
+        ${RAYLIB_EXTRA_SOURCE_FILES}
+        ${RAYLIB_UTILS_SOURCE_FILES}
+        ${JSON_SOURCE_FILES}
+        ${CSV2_SOURCE_FILES}
+        ${BOX2D_LITE_SOURCE_FILES}
         ${MNIST_READER_SRC}
         ${DOCTEST_SRC}
         ${BOOST_SOURCE_FILES}
         ${MAIN_SRC}
-        src/main/example/OpenCLExamples.hpp src/main/example/PerfTests.hpp)
+        )
 
 find_package(raylib 3.0 QUIET) # Let CMake search for a raylib-config.cmake
 # You could change the QUIET above to REQUIRED and remove this if() clause
@@ -107,9 +146,12 @@ find_package(raylib 3.0 QUIET) # Let CMake search for a raylib-config.cmake
 
 message("OPENGL_LIBRARIES: ${OPENGL_LIBRARIES}")
 message("RAYLIB_LIB: ${RAYLIB_LIB}")
-message("GLEW::GLEW: ${GLEW}")
-message("CMAKE_CURRENT_BINARY_DIR: ${CMAKE_CURRENT_BINARY_DIR}")
-message("LIBSIMD_CPP_SRC: ${LIBSIMD_CPP_SRC}")
+message("raylib_SOURCE_DIR: ${raylib_SOURCE_DIR}")
+message("raylib_BINARY_DIR: ${raylib_BINARY_DIR}")
+message("raylib_INCLUDE_DIR: ${raylib_INCLUDE_DIR}")
+message("GLEW::GLEW: ${GLEW_BINARY_DIR}")
+#message("CMAKE_CURRENT_BINARY_DIR: ${CMAKE_CURRENT_BINARY_DIR}")
+#message("LIBSIMD_CPP_SRC: ${LIBSIMD_CPP_SRC}")
 target_link_libraries(boondi
         ${OPENGL_LIBRARIES}
         GLEW::GLEW

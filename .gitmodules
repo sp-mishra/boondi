@@ -115,3 +115,6 @@
 [submodule "src/third_party/ureact"]
 	path = src/third_party/ureact
 	url = https://github.com/YarikTH/ureact.git
+[submodule "src/third_party/fmt"]
+	path = src/third_party/fmt
+	url = https://github.com/fmtlib/fmt.git
