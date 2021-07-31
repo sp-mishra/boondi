@@ -2,6 +2,9 @@
 #ifndef BOONDI_SRC_MAIN_EXAMPLE_OPENCLEXAMPLES_HPP_
 #define BOONDI_SRC_MAIN_EXAMPLE_OPENCLEXAMPLES_HPP_
 
+#define ANKERL_NANOBENCH_IMPLEMENT
+#include <nanobench.h>
+
 #include <boost/compute/algorithm/transform.hpp>
 #include <boost/compute/container/vector.hpp>
 #include <boost/compute/functional/math.hpp>
@@ -75,6 +78,33 @@ class OpenCLExamples {
     compute::copy(
         device_vector.begin(), device_vector.end(), host_vector.begin(), *_commandQueue
     );
+  }
+
+  static void runExamples() {
+    OpenCLExamples openCLExamples;
+//  ankerl::nanobench::Bench().minEpochIterations(1085).run("OpenCL: Print Versions", [&] {
+//    openCLExamples.printOpenClVersions();
+//  });
+
+    const std::size_t numItr = 1085;
+//  const std::size_t numItr = 500;
+    ankerl::nanobench::Bench().minEpochIterations(numItr*17).run("OpenCL: Compute Sqrt", [&] {
+      openCLExamples.computeCLSqrRoot();
+    });
+
+    ankerl::nanobench::Bench().minEpochIterations(numItr).run("General: Compute Sqrt", [&] {
+      openCLExamples.computeSqrRoot();
+    });
+
+    openCLExamples.finalize();
+    ankerl::nanobench::Bench().minEpochIterations(numItr).run("General: Some double ops", [&] {
+      double d = 1.0;
+      d += 1.0 / d;
+      if (d > 5.0) {
+        d -= 5.0;
+      }
+      ankerl::nanobench::doNotOptimizeAway(d);
+    });
   }
 };
 }

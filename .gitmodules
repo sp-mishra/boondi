@@ -10,3 +10,9 @@
 [submodule "src/third_party/mnist"]
 	path = src/third_party/mnist
 	url = https://github.com/wichtounet/mnist.git
+[submodule "src/third_party/argh"]
+	path = src/third_party/argh
+	url = https://github.com/adishavit/argh.git
+[submodule "src/third_party/raylib"]
+	path = src/third_party/raylib
+	url = https://github.com/raysan5/raylib.git

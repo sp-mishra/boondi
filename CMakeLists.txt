@@ -11,6 +11,7 @@ include_directories(src/third_party/nanobench/src/include)
 include_directories(src/third_party/doctest)
 include_directories(src/third_party/libsimdpp)
 include_directories(src/third_party/mnist/include)
+include_directories(src/third_party/argh)
 
 find_library(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
@@ -18,9 +19,16 @@ find_package(OpenCL REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIRS})
 include_directories(${GLEW_INCLUDE_DIRS})
 
+add_subdirectory(src/third_party/raylib)
+
 file(GLOB
         NANO_BENCHMARK_SRC
         "src/third_party/nanobench/src/include/nanobench.h"
+        )
+
+file(GLOB
+        ARGH_SRC
+        "src/third_party/argh/argh.h"
         )
 
 file(GLOB
@@ -48,12 +56,12 @@ file(GLOB
         "src/third_party/doctest/doctest/parts/*.h"
         "src/third_party/doctest/doctest/parts/*.cpp"
         )
+
 file(GLOB_RECURSE
         BOOST_SOURCE_FILES
         src/third_party/boost/*.h
         src/third_party/boost/*.hpp
         )
-
 
 file(GLOB
         MAIN_SRC
@@ -63,6 +71,7 @@ file(GLOB
 
 add_executable(boondi
         ${LIBSIMD_CPP_SRC}
+        ${ARGH_SRC}
         ${NANO_BENCHMARK_SRC}
         ${MNIST_READER_SRC}
         ${DOCTEST_SRC}
@@ -73,28 +82,28 @@ add_executable(boondi
 find_package(raylib 3.0 QUIET) # Let CMake search for a raylib-config.cmake
 # You could change the QUIET above to REQUIRED and remove this if() clause
 # This part downloads raylib and builds it if it's not installed on your system
-if (NOT raylib_FOUND) # If there's none, fetch and build raylib
-    include(FetchContent)
+#if (NOT raylib_FOUND) # If there's none, fetch and build raylib
+#    include(FetchContent)
+#
+#    FetchContent_Declare(
+#            raylib
+#            URL https://github.com/raysan5/raylib/archive/master.tar.gz
+#    )
+#
+#    FetchContent_GetProperties(raylib)
+#    if (NOT raylib_POPULATED) # Have we downloaded raylib yet?
+#        set(FETCHCONTENT_QUIET NO)
+#        FetchContent_Populate(raylib)
+#
+#        set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE) # don't build the supplied examples
+#
+#        # build raylib
+#        add_subdirectory(${raylib_SOURCE_DIR} ${raylib_BINARY_DIR})
+#    endif ()
+#endif ()
+#find_library(RAYLIB_LIB raylib)
 
-    FetchContent_Declare(
-            raylib
-            URL https://github.com/raysan5/raylib/archive/master.tar.gz
-    )
-
-    FetchContent_GetProperties(raylib)
-    if (NOT raylib_POPULATED) # Have we downloaded raylib yet?
-        set(FETCHCONTENT_QUIET NO)
-        FetchContent_Populate(raylib)
-
-        set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE) # don't build the supplied examples
-
-        # build raylib
-        add_subdirectory(${raylib_SOURCE_DIR} ${raylib_BINARY_DIR})
-    endif ()
-endif ()
-find_library(RAYLIB_LIB raylib)
-
-find_package(raylib 3.0 QUIET) # Let CMake search for a raylib-config.cmake
+#find_package(raylib 3.0 REQUIRED) # Let CMake search for a raylib-config.cmake
 
 message("OPENGL_LIBRARIES: ${OPENGL_LIBRARIES}")
 message("RAYLIB_LIB: ${RAYLIB_LIB}")
