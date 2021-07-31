@@ -79,3 +79,6 @@
 [submodule "src/third_party/tiny-dnn"]
 	path = src/third_party/tiny-dnn
 	url = https://github.com/tiny-dnn/tiny-dnn.git
+[submodule "src/third_party/MiniDNN"]
+	path = src/third_party/MiniDNN
+	url = https://github.com/yixuan/MiniDNN.git
