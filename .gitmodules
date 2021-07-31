@@ -82,3 +82,36 @@
 [submodule "src/third_party/MiniDNN"]
 	path = src/third_party/MiniDNN
 	url = https://github.com/yixuan/MiniDNN.git
+[submodule "src/third_party/json"]
+	path = src/third_party/json
+	url = https://github.com/nlohmann/json.git
+[submodule "src/third_party/spdlog"]
+	path = src/third_party/spdlog
+	url = https://github.com/gabime/spdlog.git
+[submodule "src/third_party/entt"]
+	path = src/third_party/entt
+	url = https://github.com/skypjack/entt.git
+[submodule "src/third_party/csv2"]
+	path = src/third_party/csv2
+	url = https://github.com/p-ranav/csv2.git
+[submodule "src/third_party/libgrape-lite"]
+	path = src/third_party/libgrape-lite
+	url = https://github.com/alibaba/libgrape-lite.git
+[submodule "src/third_party/BrainTree"]
+	path = src/third_party/BrainTree
+	url = https://github.com/arvidsson/BrainTree.git
+[submodule "src/third_party/HFSM2"]
+	path = src/third_party/HFSM2
+	url = https://github.com/andrew-gresyk/HFSM2.git
+[submodule "src/third_party/array-hash"]
+	path = src/third_party/array-hash
+	url = https://github.com/Tessil/array-hash.git
+[submodule "src/third_party/array"]
+	path = src/third_party/array
+	url = https://github.com/dsharlet/array.git
+[submodule "src/third_party/valuable"]
+	path = src/third_party/valuable
+	url = https://github.com/LoopPerfect/valuable.git
+[submodule "src/third_party/ureact"]
+	path = src/third_party/ureact
+	url = https://github.com/YarikTH/ureact.git
