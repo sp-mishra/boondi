@@ -20,6 +20,16 @@ include_directories(src/third_party/csv2/single_include/csv2)
 include_directories(src/third_party/box2d-lite/include)
 include_directories(src/third_party/spdlog/include)
 include_directories(src/third_party/fmt/include)
+include_directories(src/third_party/imgui)
+include_directories(src/third_party/imgui/misc/fonts)
+include_directories(src/third_party/imgui/misc/cpp/)
+include_directories(src/third_party/imgui/backends)
+include_directories(src/third_party/imgui-impl-raylib)
+include_directories(src/third_party/bitsery/include/bitsery)
+include_directories(src/third_party/soci/include)
+include_directories(src/third_party/hash-library)
+include_directories(src/third_party/nameof/include)
+include_directories(src/third_party/refl-cpp/include)
 
 find_library(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
@@ -28,6 +38,10 @@ include_directories(${OPENGL_INCLUDE_DIRS})
 include_directories(${GLEW_INCLUDE_DIRS})
 
 add_subdirectory(src/third_party/raylib)
+set(SOCI_SHARED OFF)
+set(SOCI_TESTS OFF)
+set(SOCI_TESTS OFF)
+add_subdirectory(src/third_party/soci)
 
 file(GLOB
         NANO_BENCHMARK_SRC
@@ -71,52 +85,116 @@ file(GLOB_RECURSE
         src/third_party/boost/*.hpp
         )
 
-file(GLOB_RECURSE
+file(GLOB
         RAYLIB_EXTRA_SOURCE_FILES
         src/third_party/raylib/src/extras/*.h
         )
 
-file(GLOB_RECURSE
+file(GLOB
         RAYLIB_UTILS_SOURCE_FILES
         src/third_party/rayutils/*.h
         )
 
-file(GLOB_RECURSE
+file(GLOB
         JSON_SOURCE_FILES
-        src/third_party/json/single_include/nlohmann/*.hpp
+        src/third_party/json/single_include/nlohmann/json.hpp
         )
 
-file(GLOB_RECURSE
+file(GLOB
         CSV2_SOURCE_FILES
         src/third_party/csv2/single_include/csv2/*.hpp
         )
 
-file(GLOB_RECURSE
+file(GLOB
         BOX2D_LITE_SOURCE_FILES
         src/third_party/box2d-lite/src/*.cpp
         src/third_party/box2d-lite/include/box2d-lite/*.h
+        )
+
+file(GLOB
+        TINYGEOM2D_SOURCE_FILES
+        src/third_party/tinygeom2d/tinygeom2d/*.hpp
+        src/third_party/tinygeom2d/tinygeom2d/*.cpp
+        )
+
+file(GLOB
+        IMGUI_SOURCE_FILES
+        src/third_party/imgui/*.cpp
+        src/third_party/imgui/*.h
+        src/third_party/imgui/misc/cpp/*.h
+        src/third_party/imgui/misc/cpp/*.cpp
+#        src/third_party/imgui/misc/fonts/*.cpp
+#        src/third_party/imgui/misc/fonts/*.h
+        src/third_party/imgui/backends/imgui_impl_glfw.cpp
+        src/third_party/imgui/backends/imgui_impl_glfw.h
+        src/third_party/imgui/backends/imgui_impl_metal.h
+#        src/third_party/imgui/misc/freetype/*.cpp
+#        src/third_party/imgui/misc/freetype/*.h
+        )
+
+file(GLOB
+        IMGUI_RAYLIB_SOURCE_FILES
+        src/third_party/imgui-impl-raylib/*.cpp
+        src/third_party/imgui-impl-raylib/*.h
+        )
+
+file(GLOB_RECURSE
+        BITSERY_SOURCE_FILES
+        src/third_party/bitsery/include/bitsery/*.h
+        )
+
+file(GLOB
+        HASHLIBRARY_SOURCE_FILES
+        src/third_party/hash-library/*.cpp
+        src/third_party/hash-library/*.h
+        )
+
+file(GLOB
+        NAMEOF_SOURCE_FILES
+        src/third_party/nameof/include/nameof.hpp
+        )
+
+file(GLOB
+        REFlCPP_SOURCE_FILES
+        src/third_party/refl-cpp/include/refl.hpp
+        )
+
+file(GLOB
+        SQLITE_SOURCE_FILES
+        src/third_party/sqlite/sqlite3.c
+        src/third_party/sqlite/sqlite3.h
+        src/third_party/sqlite/sqlite3ext.h
         )
 
 file(GLOB_RECURSE
         MAIN_SRC
         "src/main/*.cpp"
         "src/main/*.hpp"
+#        "src/main/bun/*.hpp"
         )
 
 add_executable(boondi
         ${LIBSIMD_CPP_SRC}
         ${ARGH_SRC}
         ${NANO_BENCHMARK_SRC}
+        ${TINYGEOM2D_SOURCE_FILES}
         ${RAYLIB_EXTRA_SOURCE_FILES}
         ${RAYLIB_UTILS_SOURCE_FILES}
+        ${IMGUI_SOURCE_FILES}
+        ${IMGUI_RAYLIB_SOURCE_FILES}
         ${JSON_SOURCE_FILES}
         ${CSV2_SOURCE_FILES}
+        ${BITSERY_SOURCE_FILES}
+        ${SQLITE_SOURCE_FILES}
+        ${NAMEOF_SOURCE_FILES}
+        ${REFlCPP_SOURCE_FILES}
+#        ${HASHLIBRARY_SOURCE_FILES}
         ${BOX2D_LITE_SOURCE_FILES}
         ${MNIST_READER_SRC}
         ${DOCTEST_SRC}
         ${BOOST_SOURCE_FILES}
         ${MAIN_SRC}
-        )
+        src/main/example/reflection/refl.hpp)
 
 find_package(raylib 3.0 QUIET) # Let CMake search for a raylib-config.cmake
 # You could change the QUIET above to REQUIRED and remove this if() clause
@@ -150,6 +228,8 @@ message("raylib_SOURCE_DIR: ${raylib_SOURCE_DIR}")
 message("raylib_BINARY_DIR: ${raylib_BINARY_DIR}")
 message("raylib_INCLUDE_DIR: ${raylib_INCLUDE_DIR}")
 message("GLEW::GLEW: ${GLEW_BINARY_DIR}")
+message("MAIN_SRC: ${MAIN_SRC}")
+#message("soci_SOURCE_DIR: ${soci_SOURCE_DIR}")
 #message("CMAKE_CURRENT_BINARY_DIR: ${CMAKE_CURRENT_BINARY_DIR}")
 #message("LIBSIMD_CPP_SRC: ${LIBSIMD_CPP_SRC}")
 target_link_libraries(boondi
@@ -157,5 +237,8 @@ target_link_libraries(boondi
         GLEW::GLEW
         raylib
         glfw
+        soci_core_static
+        soci_sqlite3_static
+        soci_empty_static
         OpenCL::OpenCL
         )

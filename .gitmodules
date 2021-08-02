@@ -118,3 +118,39 @@
 [submodule "src/third_party/fmt"]
 	path = src/third_party/fmt
 	url = https://github.com/fmtlib/fmt.git
+[submodule "src/third_party/bitsery"]
+	path = src/third_party/bitsery
+	url = https://github.com/fraillt/bitsery.git
+[submodule "src/third_party/soci"]
+	path = src/third_party/soci
+	url = https://github.com/SOCI/soci.git
+[submodule "src/third_party/bun"]
+	path = src/third_party/bun
+	url = https://github.com/BrainlessLabs/bun.git
+[submodule "src/third_party/hash-library"]
+	path = src/third_party/hash-library
+	url = https://github.com/stbrumme/hash-library.git
+[submodule "src/third_party/xxhash"]
+	path = src/third_party/xxhash
+	url = https://github.com/stbrumme/xxhash.git
+[submodule "src/third_party/refl-cpp"]
+	path = src/third_party/refl-cpp
+	url = https://github.com/veselink1/refl-cpp.git
+[submodule "src/third_party/nameof"]
+	path = src/third_party/nameof
+	url = https://github.com/Neargye/nameof.git
+[submodule "src/third_party/ormpp"]
+	path = src/third_party/ormpp
+	url = https://github.com/qicosmos/ormpp.git
+[submodule "src/third_party/date"]
+	path = src/third_party/date
+	url = https://github.com/HowardHinnant/date.git
+[submodule "src/third_party/te"]
+	path = src/third_party/te
+	url = https://github.com/boost-ext/te.git
+[submodule "src/third_party/px"]
+	path = src/third_party/px
+	url = https://github.com/pplux/px.git
+[submodule "src/third_party/rtm"]
+	path = src/third_party/rtm
+	url = https://github.com/nfrechette/rtm.git
