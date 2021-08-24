@@ -35,6 +35,11 @@ struct DBTypes<unsigned char> {
 };
 
 template<>
+struct DBTypes<long long > {
+  inline static std::string const TypeName = DBConstants::INTEGER;
+};
+
+template<>
 struct DBTypes<float> {
   inline static std::string const TypeName = DBConstants::REAL;
 };

@@ -13,13 +13,13 @@ namespace grkl {
 /// @return Returns the logger.
 /////////////////////////////////////////////////
 inline spdlog::logger &l() {
-  static const std::size_t q_size = 1048576; //queue size must be power of 2
+//  static const std::size_t q_size = 1048576; //queue size must be power of 2
   //spdlog::set_async_mode( q_size );
 //        static const auto ret = spdlog::basic_logger_mt( "bun_logger",
 //                                                   "query_log.txt" );
   // create color multi threaded logger
-  static const auto console = spdlog::stdout_color_mt("console");
-  static const auto err_logger = spdlog::stderr_color_mt("stderr");
+  static auto console = spdlog::stdout_color_mt("console");
+  static auto err_logger = spdlog::stderr_color_mt("stderr");
   static bool initialized = false;
   if (!initialized) {
     spdlog::set_pattern("***[%l] [%H:%M:%S %z] [thread %t] %v ***");
@@ -35,7 +35,7 @@ inline static void info(const T &msg) {
 }
 
 template<typename FormatString, typename... Args>
-inline void info(const FormatString &fmt, const Args &... args) {
+inline void info(FormatString &fmt, const Args &... args) {
   l().info(fmt, args...);
 }
 

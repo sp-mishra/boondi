@@ -30,6 +30,7 @@ include_directories(src/third_party/soci/include)
 include_directories(src/third_party/hash-library)
 include_directories(src/third_party/nameof/include)
 include_directories(src/third_party/refl-cpp/include)
+include_directories(/usr/local/Cellar/soci/4.0.2/include)
 
 find_library(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
@@ -38,10 +39,11 @@ include_directories(${OPENGL_INCLUDE_DIRS})
 include_directories(${GLEW_INCLUDE_DIRS})
 
 add_subdirectory(src/third_party/raylib)
-set(SOCI_SHARED OFF)
-set(SOCI_TESTS OFF)
-set(SOCI_TESTS OFF)
-add_subdirectory(src/third_party/soci)
+add_subdirectory(src/third_party/spdlog)
+#set(SOCI_SHARED OFF)
+#set(SOCI_TESTS OFF)
+#set(SOCI_ODBC OFF)
+#add_subdirectory(src/third_party/soci)
 
 file(GLOB
         NANO_BENCHMARK_SRC
@@ -173,6 +175,8 @@ file(GLOB_RECURSE
 #        "src/main/bun/*.hpp"
         )
 
+
+
 add_executable(boondi
         ${LIBSIMD_CPP_SRC}
         ${ARGH_SRC}
@@ -196,6 +200,7 @@ add_executable(boondi
         ${MAIN_SRC}
         src/main/example/reflection/refl.hpp)
 
+find_package(spdlog QUIET)
 find_package(raylib 3.0 QUIET) # Let CMake search for a raylib-config.cmake
 # You could change the QUIET above to REQUIRED and remove this if() clause
 # This part downloads raylib and builds it if it's not installed on your system
@@ -237,8 +242,9 @@ target_link_libraries(boondi
         GLEW::GLEW
         raylib
         glfw
-        soci_core_static
-        soci_sqlite3_static
-        soci_empty_static
+#        soci_core_static
+#        soci_sqlite3_static
+#        soci_empty_static
         OpenCL::OpenCL
+        spdlog::spdlog
         )
