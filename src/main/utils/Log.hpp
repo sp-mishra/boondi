@@ -1,7 +1,8 @@
 #pragma once
 #ifndef BOONDI_SRC_MAIN_UTILS_LOG_HPP_
 #define BOONDI_SRC_MAIN_UTILS_LOG_HPP_
-
+//#define FMT_HEADER_ONLY
+#define FMT_CONSTEVAL
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 
@@ -22,7 +23,8 @@ inline spdlog::logger &l() {
   static auto err_logger = spdlog::stderr_color_mt("stderr");
   static bool initialized = false;
   if (!initialized) {
-    spdlog::set_pattern("***[%l] [%H:%M:%S %z] [thread %t] %v ***");
+//    spdlog::set_pattern("*** [%l] [%H:%M:%S %z] [thread %t] %^%v %$ ***");
+    spdlog::set_pattern("*** [%l] [thread %t] %^%v %$ ***");
     initialized = true;
   }
 

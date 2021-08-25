@@ -4,6 +4,9 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+#add_compile_definitions(FMT_CONSTEVAL= )
+add_definitions(-DFMT_CONSTEVAL= )
+
 include_directories(/usr/local/include)
 include_directories(src/main/)
 include_directories(src/third_party/)
@@ -198,7 +201,7 @@ add_executable(boondi
         ${DOCTEST_SRC}
         ${BOOST_SOURCE_FILES}
         ${MAIN_SRC}
-        src/main/example/reflection/refl.hpp)
+        )
 
 find_package(spdlog QUIET)
 find_package(raylib 3.0 QUIET) # Let CMake search for a raylib-config.cmake

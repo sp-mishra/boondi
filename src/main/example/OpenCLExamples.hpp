@@ -4,18 +4,16 @@
 
 #define ANKERL_NANOBENCH_IMPLEMENT
 #include <nanobench.h>
-
-#include <boost/compute/algorithm/transform.hpp>
-#include <boost/compute/container/vector.hpp>
-#include <boost/compute/functional/math.hpp>
-#include <boost/compute/core.hpp>
-
-#include <iostream>
 #include <memory>
 #include <vector>
 #include <algorithm>
 #include <functional>
 #include <cmath>
+#include <boost/compute/algorithm/transform.hpp>
+#include <boost/compute/container/vector.hpp>
+#include <boost/compute/functional/math.hpp>
+#include <boost/compute/core.hpp>
+#include "utils/Log.hpp"
 
 namespace grkl {
 namespace compute = boost::compute;
@@ -46,14 +44,14 @@ class OpenCLExamples {
     std::generate(_input->begin(), _input->end(), rand);
   }
 
-  void printOpenClVersions() {
+  void printOpenClVersions() const {
     // print the device's name and platform
-    std::cout << "hello from " << _device.name() << " (platform: " << _device.platform().name() << ")" << std::endl;
+    info("Hello world from {} (platform {})", _device.name(), _device.platform().name());
   }
 
-  void computeCLSqrRoot() {
-    std::vector<float>& host_vector = *_input;
-    compute::vector<float>& device_vector = *_deviceVector;
+  void computeCLSqrRoot() const {
+    std::vector<float> const& host_vector = *_input;
+    compute::vector<float> const& device_vector = *_deviceVector;
     // calculate the square-root of each element in-place
     compute::transform(
         device_vector.begin(),
@@ -64,14 +62,14 @@ class OpenCLExamples {
     );
   }
 
-  void computeSqrRoot() {
+  void computeSqrRoot() const {
     std::vector<float>& input = *_input;
     std::vector<float>& output = *_output;
     // calculate the square-root of each element
     std::transform(input.begin(), input.end(), output.begin(), [](float i) {return std::sqrt(i);});
   }
 
-  void finalize() {
+  void finalize() const {
     std::vector<float>& host_vector = *_input;
     compute::vector<float>& device_vector = *_deviceVector;
     // copy values back to the host
@@ -88,16 +86,16 @@ class OpenCLExamples {
 
     const std::size_t numItr = 1085;
 //  const std::size_t numItr = 500;
-    ankerl::nanobench::Bench().minEpochIterations(numItr*17).run("OpenCL: Compute Sqrt", [&] {
+    ankerl::nanobench::Bench().minEpochIterations(numItr*17).run("OpenCL: Compute Sqrt", [&openCLExamples] {
       openCLExamples.computeCLSqrRoot();
     });
 
-    ankerl::nanobench::Bench().minEpochIterations(numItr).run("General: Compute Sqrt", [&] {
+    ankerl::nanobench::Bench().minEpochIterations(numItr).run("General: Compute Sqrt", [&openCLExamples] {
       openCLExamples.computeSqrRoot();
     });
 
     openCLExamples.finalize();
-    ankerl::nanobench::Bench().minEpochIterations(numItr).run("General: Some double ops", [&] {
+    ankerl::nanobench::Bench().minEpochIterations(numItr).run("General: Some double ops", [] {
       double d = 1.0;
       d += 1.0 / d;
       if (d > 5.0) {
