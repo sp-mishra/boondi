@@ -33,7 +33,7 @@ include_directories(src/third_party/soci/include)
 include_directories(src/third_party/hash-library)
 include_directories(src/third_party/nameof/include)
 include_directories(src/third_party/refl-cpp/include)
-include_directories(/usr/local/Cellar/soci/4.0.2/include)
+#include_directories(/usr/local/Cellar/soci/4.0.2/include)
 
 find_library(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
@@ -43,10 +43,10 @@ include_directories(${GLEW_INCLUDE_DIRS})
 
 add_subdirectory(src/third_party/raylib)
 add_subdirectory(src/third_party/spdlog)
-#set(SOCI_SHARED OFF)
-#set(SOCI_TESTS OFF)
-#set(SOCI_ODBC OFF)
-#add_subdirectory(src/third_party/soci)
+set(SOCI_SHARED OFF)
+set(SOCI_TESTS OFF)
+set(SOCI_ODBC OFF)
+add_subdirectory(src/third_party/soci)
 
 file(GLOB
         NANO_BENCHMARK_SRC
@@ -245,9 +245,9 @@ target_link_libraries(boondi
         GLEW::GLEW
         raylib
         glfw
-#        soci_core_static
-#        soci_sqlite3_static
-#        soci_empty_static
+        soci_core_static
+        soci_sqlite3_static
+        soci_empty_static
         OpenCL::OpenCL
         spdlog::spdlog
         )
