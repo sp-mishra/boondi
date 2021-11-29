@@ -6,6 +6,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 #add_compile_definitions(FMT_CONSTEVAL= )
 add_definitions(-DFMT_CONSTEVAL= )
+add_definitions(-DCMAKE_EXPORT_COMPILE_COMMANDS=ON)
 
 include_directories(/usr/local/include)
 include_directories(src/main/)
@@ -29,10 +30,12 @@ include_directories(src/third_party/imgui/misc/cpp/)
 include_directories(src/third_party/imgui/backends)
 include_directories(src/third_party/imgui-impl-raylib)
 include_directories(src/third_party/bitsery/include/bitsery)
-include_directories(src/third_party/soci/include)
+#include_directories(src/third_party/soci/include/soci)
+#include_directories(src/third_party/soci/include)
 include_directories(src/third_party/hash-library)
 include_directories(src/third_party/nameof/include)
 include_directories(src/third_party/refl-cpp/include)
+include_directories(src/third_party/Linq)
 #include_directories(/usr/local/Cellar/soci/4.0.2/include)
 
 find_library(OpenGL REQUIRED)
@@ -43,11 +46,15 @@ include_directories(${GLEW_INCLUDE_DIRS})
 
 add_subdirectory(src/third_party/raylib)
 add_subdirectory(src/third_party/spdlog)
+add_subdirectory(src/third_party/sqlite)
 set(SOCI_SHARED OFF)
 set(SOCI_TESTS OFF)
 set(SOCI_ODBC OFF)
+set(SQLITE3_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/src/third_party/sqlite/)
+#set(SQLITE3_LIBRARIES ${CMAKE_BINARY_DIR})
 add_subdirectory(src/third_party/soci)
-
+add_subdirectory(src/third_party/Linq)
+find_library(SOCI_LIB soci)
 file(GLOB
         NANO_BENCHMARK_SRC
         "src/third_party/nanobench/src/include/nanobench.h"
@@ -164,12 +171,12 @@ file(GLOB
         src/third_party/refl-cpp/include/refl.hpp
         )
 
-file(GLOB
-        SQLITE_SOURCE_FILES
-        src/third_party/sqlite/sqlite3.c
-        src/third_party/sqlite/sqlite3.h
-        src/third_party/sqlite/sqlite3ext.h
-        )
+#file(GLOB
+#        SQLITE_SOURCE_FILES
+#        src/third_party/sqlite/sqlite3.c
+#        src/third_party/sqlite/sqlite3.h
+#        src/third_party/sqlite/sqlite3ext.h
+#        )
 
 file(GLOB_RECURSE
         MAIN_SRC
@@ -204,6 +211,7 @@ add_executable(boondi
         )
 
 find_package(spdlog QUIET)
+#find_library(SQLITE3_LIB sqlite3)
 find_package(raylib 3.0 QUIET) # Let CMake search for a raylib-config.cmake
 # You could change the QUIET above to REQUIRED and remove this if() clause
 # This part downloads raylib and builds it if it's not installed on your system
@@ -235,6 +243,10 @@ message("RAYLIB_LIB: ${RAYLIB_LIB}")
 message("raylib_SOURCE_DIR: ${raylib_SOURCE_DIR}")
 message("raylib_BINARY_DIR: ${raylib_BINARY_DIR}")
 message("raylib_INCLUDE_DIR: ${raylib_INCLUDE_DIR}")
+message("sqlite_SOURCE_DIR: ${sqlite_SOURCE_DIR}")
+message("sqlite_BINARY_DIR: ${sqlite_BINARY_DIR}")
+message("LIBRARY_OUTPUT_PATH: ${LIBRARY_OUTPUT_PATH}")
+message("soci_INCLUDE_DIR: ${soci_INCLUDE_DIR}")
 message("GLEW::GLEW: ${GLEW_BINARY_DIR}")
 message("MAIN_SRC: ${MAIN_SRC}")
 #message("soci_SOURCE_DIR: ${soci_SOURCE_DIR}")
@@ -245,9 +257,11 @@ target_link_libraries(boondi
         GLEW::GLEW
         raylib
         glfw
+        sqlite3
         soci_core_static
         soci_sqlite3_static
         soci_empty_static
         OpenCL::OpenCL
         spdlog::spdlog
+        linq::linq
         )

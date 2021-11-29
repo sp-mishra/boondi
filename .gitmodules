@@ -154,3 +154,6 @@
 [submodule "src/third_party/rtm"]
 	path = src/third_party/rtm
 	url = https://github.com/nfrechette/rtm.git
+[submodule "src/third_party/Linq"]
+	path = src/third_party/Linq
+	url = https://github.com/pfultz2/Linq.git
