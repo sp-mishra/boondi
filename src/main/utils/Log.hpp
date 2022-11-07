@@ -24,7 +24,7 @@ inline spdlog::logger &l() {
   static bool initialized = false;
   if (!initialized) {
 //    spdlog::set_pattern("*** [%l] [%H:%M:%S %z] [thread %t] %^%v %$ ***");
-    spdlog::set_pattern("*** [%l] [thread %t] %^%v %$ ***");
+    spdlog::set_pattern("[%l] [thread %t] %^%v %$");
     initialized = true;
   }
 

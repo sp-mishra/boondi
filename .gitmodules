@@ -232,3 +232,26 @@
 [submodule "src/third_party/bustub"]
 	path = src/third_party/bustub
 	url = git@github.com:sp-mishra/bustub.git
+[submodule "src/third_party/hyrise"]
+	path = src/third_party/hyrise
+	url = git@github.com:sp-mishra/hyrise.git
+[submodule "src/third_party/sql-parser"]
+	path = src/third_party/sql-parser
+	url = git@github.com:sp-mishra/sql-parser.git
+[submodule "src/third_party/boolinq"]
+	path = src/third_party/boolinq
+	url = git@github.com:sp-mishra/boolinq.git
+[submodule "src/third_party/Catch2"]
+	path = src/third_party/Catch2
+	url = git@github.com:catchorg/Catch2.git
+	branch = v2.x
+[submodule "src/third_party/lexy"]
+	path = src/third_party/lexy
+	url = git@github.com:sp-mishra/lexy.git
+[submodule "src/third_party/asmjit"]
+	path = src/third_party/asmjit
+	url = git@github.com:asmjit/asmjit.git
+[submodule "src/third_party/PEGTL"]
+	path = src/third_party/PEGTL
+	url = git@github.com:taocpp/PEGTL.git
+	branch = 3.x
